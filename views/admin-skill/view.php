@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
@@ -10,6 +12,23 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Skills', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+$indexUrl = Url::to(['index']);
+$indexUrlJs = Json::htmlEncode($indexUrl);
+$this->registerJs(<<<JS
+document.addEventListener('keydown', function (e) {
+  if (e.isComposing) return;
+  if (e.key !== 'Enter') return;
+  if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+
+  var t = e.target;
+  var tag = (t && t.tagName) ? String(t.tagName).toUpperCase() : '';
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON' || tag === 'A') return;
+
+  e.preventDefault();
+  window.location.href = $indexUrlJs;
+});
+JS);
 ?>
 <div class="skill-view">
 

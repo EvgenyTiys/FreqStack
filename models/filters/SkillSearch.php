@@ -51,6 +51,7 @@ class SkillSearch extends Skill
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_DESC];
         $dataProvider->sort->attributes['skillCathegoryName'] = [
             'asc' => ['SkillCathegory.name' => SORT_ASC],
             'desc' => ['SkillCathegory.name' => SORT_DESC],

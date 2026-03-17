@@ -21,7 +21,7 @@ YiiAsset::register($this);
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Skill', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Skill', ['create'], ['class' => 'btn btn-success js-create-skill']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -87,6 +87,22 @@ YiiAsset::register($this);
 <?php
 $this->registerJs(<<<'JS'
 (function () {
+  document.addEventListener('keydown', function (e) {
+    if (e.isComposing) return;
+    if (e.key !== 'Enter') return;
+    if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+
+    var t = e.target;
+    var tag = (t && t.tagName) ? String(t.tagName).toUpperCase() : '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON' || tag === 'A') return;
+
+    var el = document.querySelector('.js-create-skill');
+    if (!el) return;
+
+    e.preventDefault();
+    el.click();
+  });
+
   function csrfParam() {
     return (window.yii && yii.getCsrfParam) ? yii.getCsrfParam() : '_csrf';
   }
