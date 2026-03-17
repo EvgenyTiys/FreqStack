@@ -1,5 +1,42 @@
 An interface and database for collecting statistics on technologies and skills mentioned as required in job postings. The purpose of this database is to create a frequency stack of skills and technologies for selecting training courses that best meet the needs of companies in the labor market in the field of interest.
 
+RUNNING THE APPLICATION
+-----------------------
+
+### Local PHP built‑in server
+
+1. Install dependencies:
+
+   ```bash
+   composer install
+   ```
+
+2. Configure the database connection in `config/db.php` and set `cookieValidationKey` in `config/web.php` (see examples below in this file).
+
+3. Apply migrations (if any):
+
+   ```bash
+   php yii migrate
+   ```
+
+4. Start the built‑in server from the project root:
+
+   ```bash
+   php yii serve --port=8080
+   ```
+
+5. Open the application in browser:
+
+   ```text
+   http://localhost:8080
+   ```
+
+### Using a regular web server (Apache/nginx)
+
+1. Point the virtual host document root to the `web/` directory of the project.
+2. Make sure `composer install` has been executed and `config/db.php` / `config/web.php` are configured.
+3. Restart the web server and open the site by the configured host name.
+
 The project is based on Yii2 framework. To work with it, please follow the instructions:
 
 <p align="center">
