@@ -114,3 +114,70 @@ a.desc:after {
     background: #fff;
     border-radius: 3px;
 }
+
+/* Skill index: alarmist background by count */
+.skill-index table tr.skill-row-level-0 td,
+.skill-index table tr.skill-row-level-1 td {
+    background-color: #ffffff;
+}
+.skill-index table tr.skill-row-level-2 td {
+    background-color: #ffe0e0;
+}
+.skill-index table tr.skill-row-level-3 td {
+    background-color: #ffb3b3;
+}
+.skill-index table tr.skill-row-level-4 td {
+    background-color: #ff8080;
+}
+.skill-index table tr.skill-row-level-5 td {
+    background-color: #ff4d4d;
+}
+
+/* GridView pager: modern centered pills */
+.grid-view .pagination {
+    justify-content: center;
+    margin: 20px 0 0;
+    gap: 4px;
+}
+
+.grid-view .pagination li > a,
+.grid-view .pagination li > span {
+    border-radius: 999px;
+    padding: 6px 12px;
+    min-width: 34px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    transition: all .15s ease-in-out;
+}
+
+.grid-view .pagination li > a:hover {
+    background-color: #f1f3f5;
+    border-color: #ced4da;
+    text-decoration: none;
+}
+
+.grid-view .pagination .active > a,
+.grid-view .pagination .active > span {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+    box-shadow: 0 0.1rem 0.25rem rgba(13,110,253,.4);
+}
+
+.grid-view .pagination .disabled > span,
+.grid-view .pagination .disabled > a {
+    color: #adb5bd;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    box-shadow: none;
+}
+
+.grid-view .pagination li:first-child > a,
+.grid-view .pagination li:first-child > span,
+.grid-view .pagination li:last-child > a,
+.grid-view .pagination li:last-child > span {
+    border-radius: 999px;
+}

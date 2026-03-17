@@ -29,6 +29,23 @@ YiiAsset::register($this);
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => [
+            'class' => 'table table-bordered',
+        ],
+        'rowOptions' => static function (Skill $model) {
+            $count = (int)($model->count ?? 0);
+            if ($count <= 0) {
+                $level = 0;
+            } elseif ($count >= 5) {
+                $level = 5;
+            } else {
+                $level = $count;
+            }
+
+            return [
+                'class' => 'skill-row-level-' . $level,
+            ];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -118,6 +135,7 @@ $this->registerJs(<<<'JS'
     var url = $btn.data('url');
     var id = $btn.data('id');
     var $count = $('.js-skill-count[data-id="' + id + '"]');
+    var $row = $count.closest('tr');
 
     $btn.data('busy', true).addClass('disabled');
 
@@ -128,7 +146,28 @@ $this->registerJs(<<<'JS'
     $.post(url, data)
       .done(function (resp) {
         if (resp && resp.success && typeof resp.count !== 'undefined') {
-          $count.text(resp.count);
+          var newCount = parseInt(resp.count, 10) || 0;
+          $count.text(newCount);
+
+          var level;
+          if (newCount <= 0) {
+            level = 0;
+          } else if (newCount >= 5) {
+            level = 5;
+          } else {
+            level = newCount;
+          }
+
+          if ($row && $row.length) {
+            // убрать старые классы skill-row-level-X
+            $row.removeClass(function (idx, cls) {
+              return (cls || '').split(/\s+/).filter(function (c) {
+                return c.lastIndexOf('skill-row-level-', 0) === 0;
+              }).join(' ');
+            });
+            // добавить новый
+            $row.addClass('skill-row-level-' + level);
+          }
         }
       })
       .always(function () {
