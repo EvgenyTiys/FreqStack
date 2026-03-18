@@ -71,7 +71,7 @@ class SkillSearch extends Skill
             'SkillCathegory_id' => $this->SkillCathegory_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'Skill.name', $this->name])
             ->andFilterWhere(['like', 'count', $this->count]);
 
         $query->andFilterWhere(['like', 'SkillCathegory.name', $this->skillCathegoryName]);
